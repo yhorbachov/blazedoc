@@ -5,6 +5,8 @@ import (
 	"os"
 	"strings"
 
+	_ "github.com/yhorbachov/blazedoc/migrations"
+
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 )
