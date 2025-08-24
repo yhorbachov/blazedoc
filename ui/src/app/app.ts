@@ -3,7 +3,8 @@ import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  template: `<div>App</div>`,
+  template: `<router-outlet />`,
+  imports: [RouterOutlet],
 })
 export class App {
   protected readonly title = signal('ui');
