@@ -1,5 +1,4 @@
-import { Component, DestroyRef, inject } from '@angular/core';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '@core/services';
 
@@ -14,5 +13,6 @@ export class Sidebar {
 
   logout() {
     this.#auth.logout();
+    this.#router.navigateByUrl('/auth');
   }
 }
