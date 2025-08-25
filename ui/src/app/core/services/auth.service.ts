@@ -1,4 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
+import { delay, from } from 'rxjs';
 
 import { POCKETBASE } from '../tokens';
 import { Router } from '@angular/router';
@@ -13,14 +14,21 @@ export class AuthService {
 
   constructor() {
     this.#pb.authStore.onChange(() => this.#authStore.set(this.#pb.authStore));
-    this.#pb
-      .collection('users')
-      .authRefresh()
-      .catch(() => this.logout());
+    if (this.#pb.authStore.isValid) {
+      this.#pb
+        .collection('users')
+        .authRefresh()
+        .catch(() => this.logout());
+    }
   }
 
-  async login(credentials: { email: string; password: string }) {
-    await this.#pb.collection('users').authWithPassword(credentials.email, credentials.password);
+  signIn(credentials: { email: string; password: string }) {
+    return from(
+      this.#pb.collection('users').authWithPassword(credentials.email, credentials.password)
+    ).pipe(
+      // Need to delay because authStore.onChange emmits in next tick
+      delay(0)
+    );
   }
 
   async logout() {

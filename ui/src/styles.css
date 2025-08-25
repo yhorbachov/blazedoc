@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+@source inline('alert-{info,success,warning,error}');
+
 @plugin "daisyui" {
   themes: silk --default;
+}
+
+html,
+body {
+  @apply min-h-screen;
 }
