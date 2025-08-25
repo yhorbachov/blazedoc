@@ -23,10 +23,12 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
+        title: 'Dashboard',
         loadChildren: () => import('./features/dashboard'),
       },
       {
         path: 'documents',
+        title: 'Documents',
         loadChildren: () => import('./features/documents'),
       },
     ],
