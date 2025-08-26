@@ -1,1 +1,17 @@
-<div>Documents list</div>
+<div class="p-4">
+  <div class="text-2xl flex">
+    <div>Documents</div>
+    <div class="flex-1"></div>
+  </div>
+
+  <div class="mt-6">
+    <div>
+      <div>Folders</div>
+      <div>
+        @for (folder of folders(); track folder.id) {
+          <app-folder />
+        }
+      </div>
+    </div>
+  </div>
+</div>
