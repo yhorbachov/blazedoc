@@ -4,17 +4,20 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { filter, startWith } from 'rxjs';
 
 import { Sidebar } from './sidebar.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'sidebar-layout',
   templateUrl: './sidebar-layout.component.html',
-  imports: [RouterOutlet, Sidebar],
+  imports: [RouterOutlet, Sidebar, FormsModule],
 })
 export class SidebarLayout implements OnInit {
   #router = inject(Router);
   #activatedRoute = inject(ActivatedRoute);
   #destroyRef = inject(DestroyRef);
+
   title = signal('');
+  drawerOpen = signal(false);
 
   ngOnInit() {
     this.#router.events
@@ -23,7 +26,10 @@ export class SidebarLayout implements OnInit {
         startWith(null),
         takeUntilDestroyed(this.#destroyRef)
       )
-      .subscribe(() => this.#setTitle());
+      .subscribe(() => {
+        this.#setTitle();
+        this.drawerOpen.set(false);
+      });
   }
 
   #setTitle() {
