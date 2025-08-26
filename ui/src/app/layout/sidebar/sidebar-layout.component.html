@@ -1,12 +1,16 @@
 <div class="drawer lg:drawer-open bg-base-200">
   <input id="drawer" type="checkbox" class="drawer-toggle" />
   <main class="drawer-content bg-base-100">
-    <div class="p-4 border-b border-base-300 flex">
+    <div class="p-2 border-b border-base-300 flex items-center">
+      <label for="drawer" class="btn btn-circle btn-ghost mr-2">
+        <i class="ri-side-bar-line text-lg"></i>
+      </label>
       <div class="text-xl">{{ title() }}</div>
     </div>
     <router-outlet />
   </main>
   <div class="drawer-side z-40">
+    <label for="drawer" class="drawer-overlay" aria-label="Close menu"></label>
     <sidebar />
   </div>
 </div>
